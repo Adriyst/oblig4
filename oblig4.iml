@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/consume/src/main/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/consume/src/test/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/core/src/main/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/core/src/test/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/demo/src/main/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/demo/src/test/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/java-core/src/main/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/java-core/src/test/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/java8/src/main/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/java8/src/test/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/performance/src/main/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/performance/src/test/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/props-core-scalacheck/src/test/scala" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/props-core/src/test/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/quickcheck/src/main/java" />
+          <root url="file://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/quickcheck/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="JUnit5.0">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.0.0/junit-jupiter-api-5.0.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Documents/UIB/INFO233/functionaljava-master/antlr-3.1.2-1-jar-with-dependencies.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="org.functionaljava:functionaljava-quickcheck:4.7" level="project" />
+  </component>
+</module>
