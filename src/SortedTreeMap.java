@@ -185,14 +185,12 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
             while (node.rightChild != null) {
                 node = node.rightChild;
             }
-            System.out.println("icky vicky");
             return node;
         } else if (node.rightChild != null) {
             node = node.rightChild;
             while (node.leftChild != null) {
                 node = node.leftChild;
             }
-            System.out.println("ew ew");
             return node;
         } else {
             return node;
@@ -206,7 +204,6 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
         } else {
             Node node = findNode((K)key);
             if (node != null) {
-//                System.out.println(size + " size");
                 V value = node.entry.value;
 
                 if (size == 1) {
@@ -216,12 +213,21 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
                 Node replacementNode = findReplacement(node);
                 Entry entry = replacementNode.entry;
                 if (replacementNode.leftChild != null) {
-                    replacementNode.entry = replacementNode.leftChild.entry;
-                    replacementNode.leftChild = null;
-//                    System.out.println("første");
+                    if (replacementNode.parent.equals(node)) {
+                        replacementNode.parent.leftChild = replacementNode.leftChild;
+                        replacementNode.leftChild.parent = replacementNode.parent;
+                    } else {
+                        replacementNode.parent.rightChild = replacementNode.leftChild;
+                        replacementNode.leftChild.parent = replacementNode.parent;
+                    }
                 } else if (replacementNode.rightChild != null) {
-                    replacementNode.entry = replacementNode.rightChild.entry;
-                    replacementNode.rightChild = null;
+                    if (replacementNode.parent.equals(node)) {
+                        replacementNode.parent.rightChild = replacementNode.rightChild;
+                        replacementNode.rightChild.parent = replacementNode.parent;
+                    } else {
+                        replacementNode.parent.leftChild = replacementNode.rightChild;
+                        replacementNode.rightChild.parent = replacementNode.parent;
+                    }
                 } else {
                     if (replacementNode.equals(replacementNode.parent.leftChild)) {
                         replacementNode.parent.leftChild = null;
@@ -229,9 +235,6 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
                         replacementNode.parent.rightChild = null;
                     }
                 }
-                System.out.println(node.entry.key + " key som fjernes");
-                System.out.println(key + "^ skal være lik");
-                System.out.println(entry.key + " key som skal erstatte");
                 node.entry = entry;
                 size--;
                 return value;
@@ -250,7 +253,7 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
             if (node != null) {
                 return node.entry.value;
             }
-            return null;
+            throw new NoSuchElementException();
         }
     }
 
@@ -306,43 +309,11 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
         if (isEmpty()) {
             return null;
         }
-        int cmp = comparator.compare(key, root.entry.key);
-
-        if (cmp == 0) {
-            Entry entry = root.entry;
-            root = head;
-            System.out.println(entry.key + " EQUAL!");
-            return entry;
-        }
-        else if (cmp > 0) {
-            if (root.rightChild != null) {
-                root = root.rightChild;
-                return higherOrEqualEntry(key);
-            }
-            root = head;
-            System.out.println(key + " NO HIGHER THING!");
-            return null;
-        }
-        else {
-            if (root.leftChild != null) {
-                if (comparator.compare(key,root.leftChild.entry.key) < 0) {
-                    if (root.leftChild.leftChild != null || root.leftChild.rightChild != null) {
-                        Entry entry = root.entry;
-                        root = head;
-                        System.out.println(entry.key + " IS ONE HIGHER THAN " + key);
-                        return entry;
-                    }
-                    root = root.leftChild;
-                    return higherOrEqualEntry(key);
-                }
-            } else {
-                Entry entry = root.entry;
-                root = head;
-                System.out.println(entry.key + " IS ONE HIGHER THAN "+ key);
+        for (Entry<K,V> entry : entries()) {
+            if (comparator.compare(entry.key, key) >= 0) {
                 return entry;
             }
         }
-        System.out.println("NOT HERE");
         return null;
     }
 
@@ -351,19 +322,25 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
         if (isEmpty()) {
             return null;
         }
+
+        if (comparator.compare(key, min().key) < 0) {
+            return null;
+        }
+        if (comparator.compare(key, max().key) > 0) {
+            return max();
+        }
+
         Entry<K,V> ent = null;
         for (Entry<K,V> entry : entries()) {
             if (comparator.compare(key,entry.key) == 0) {
                 return entry;
             }
-            if (comparator.compare(key, entry.key) > 0) {
-                System.out.println("soup");
+            if (ent != null && comparator.compare(key, entry.key) < 0) {
                 return ent;
             }
             ent = entry;
-            System.out.println(ent.key + " " + key);
         }
-        return null;
+        return ent;
     }
 
     @Override
@@ -382,13 +359,8 @@ public class SortedTreeMap<K extends Comparable<? super K>, V> implements ISorte
                     midlArray.add(node);
                 }
             }
-            System.out.println();
-            System.out.println(this + " before everything");
             midlArray.forEach(node -> {
-                System.out.println(this + " before removing each");
-                System.out.println(root.entry.key + " current root!");
                 remove(node.entry.key);
-                System.out.println(this + " after");
             });
         }
     }
