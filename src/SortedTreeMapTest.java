@@ -228,7 +228,6 @@ public class SortedTreeMapTest {
 
                                     SortedTreeMap<Integer, String> tm = new SortedTreeMap<>(intOrd.toComparator());
                                     kvs.foreachDoEffect(kv -> tm.add(kv._1(), kv._2()));
-                                    System.out.println(entry._1() + " skal fjernes");
                                     tm.remove(entry._1());
                                     List<Integer> keys = fromIterator(tm.keys().iterator());
                                     return prop(!keys.exists(key -> key.equals(entry._1())));
